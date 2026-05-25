@@ -21,10 +21,6 @@ jobs:
             arch: arm64
             runner: macos-latest
             artifact_name: cmdAI-macOS-arm64.zip
-          - os: macOS
-            arch: amd64
-            runner: macos-13
-            artifact_name: cmdAI-macOS-amd64.zip
           - os: Windows
             arch: amd64
             runner: windows-latest
@@ -97,7 +93,6 @@ jobs:
         with:
           files: |
             artifacts/cmdAI-macOS-arm64.zip
-            artifacts/cmdAI-macOS-amd64.zip
             artifacts/cmdAI-windows-amd64.zip
             artifacts/cmdAI-linux-amd64.tar.gz
             artifacts/cmdAI-linux-arm64.tar.gz
