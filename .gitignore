@@ -1,0 +1,25 @@
+# Build artifacts
+build/
+target/
+dist/
+temp_*/
+
+# IDE files
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# macOS
+.DS_Store
+
+# App bundles
+cmdAI.app/
+cmdAI.exe/
+
+# Config (user specific)
+config.properties
+
+# Logs
+*.log
