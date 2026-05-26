@@ -95,6 +95,15 @@ Windows, macOS ve Linux (amd64 / arm64) üzerinde çalışır; bulut tabanlı ve
 ### Hazır Sürümler (Önerilen)
 Uygulamayı derlemeden doğrudan çalıştırmak için **[GitHub Releases](https://github.com/kayaberkkan/cmd-AI/releases)** sayfasından işletim sisteminize ve mimarinize uygun sürümü indirebilirsiniz:
 * **macOS**: Apple Silicon (`arm64`) veya Intel (`amd64`) sürümünü indirip `cmdAI.app` dosyasını çalıştırın.
+
+> [!TIP]
+> **macOS "Uygulama Hasar Görmüş" Hatası:**  
+> Eğer uygulamayı açtığınızda hasar gördüğü ve açılamadığına dair bir uyarı alırsanız, terminalinizde şu komutu çalıştırarak karantina bayrağını kaldırabilirsiniz:
+> ```bash
+> xattr -cr /path/to/cmdAI.app
+> ```
+> Bu durum, Apple tarafından resmi olarak imzalanmamış açık kaynaklı uygulamalar için standart bir macOS güvenlik prosedürüdür.
+
 * **Windows**: `cmdAI-windows-amd64.zip` dosyasını çıkartıp `cmdAI.exe` dosyasını çalıştırın.
 * **Linux**: `cmdAI-linux-amd64.tar.gz` veya `cmdAI-linux-arm64.tar.gz` dosyasını çıkartıp `./cmdAI/bin/cmdAI` çalıştırılabilir dosyasını çalıştırın.
 
