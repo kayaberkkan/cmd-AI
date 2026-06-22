@@ -48,7 +48,7 @@ if [ "$OS_NAME" = "Darwin" ]; then
         --main-class Main \
         --name "cmdAI" \
         --type app-image \
-        --app-version "1.1" \
+        --app-version "1.2" \
         --vendor "Berkkan Kaya" \
         --copyright "2026 Berkkan Kaya" \
         --description "Yapay Zeka Destekli Terminal Asistanı" \
@@ -84,7 +84,7 @@ elif [ "$OS_NAME" = "Linux" ]; then
         --main-class Main \
         --name "cmdAI" \
         --type app-image \
-        --app-version "1.1" \
+        --app-version "1.2" \
         --vendor "Berkkan Kaya" \
         --copyright "2026 Berkkan Kaya" \
         --description "Yapay Zeka Destekli Terminal Asistanı" \

@@ -1108,6 +1108,66 @@ public class SystemPrompts {
         return GEMINI_PROMPT;
     }
 
+    /**
+     * Get OS-specific Gemini prompt (reduces token usage by ~30-40%)
+     * Only includes platform commands relevant to the user's OS.
+     *
+     * @param os Operating system name (e.g., "Mac OS X", "Windows 10", "Linux")
+     * @return Optimized Gemini prompt for the given OS
+     */
+    public static String getGeminiPrompt(String os) {
+        if (os == null || os.isEmpty()) {
+            return GEMINI_PROMPT;
+        }
+
+        String osLower = os.toLowerCase();
+
+        // Find platform section boundaries using unique header markers
+        int winIdx = GEMINI_PROMPT.indexOf("WINDOWS (CMD)");
+        int macIdx = GEMINI_PROMPT.indexOf("macOS (zsh/bash)");
+        int linuxIdx = GEMINI_PROMPT.indexOf("LINUX (bash)");
+        int rulesIdx = GEMINI_PROMPT.indexOf("[CRITICAL SYNTAX RULES");
+
+        if (winIdx < 0 || macIdx < 0 || linuxIdx < 0 || rulesIdx < 0) {
+            return GEMINI_PROMPT; // Fallback: markers not found
+        }
+
+        // Adjust to box start (┌ character before each section header)
+        int winStart = GEMINI_PROMPT.lastIndexOf("┌", winIdx);
+        int macStart = GEMINI_PROMPT.lastIndexOf("┌", macIdx);
+        int linuxStart = GEMINI_PROMPT.lastIndexOf("┌", linuxIdx);
+
+        // Rules section starts with ═══ line before [CRITICAL SYNTAX RULES
+        int nlBefore = GEMINI_PROMPT.lastIndexOf("\n", rulesIdx - 1);
+        int rulesStart = GEMINI_PROMPT.lastIndexOf("\n", nlBefore - 1) + 1;
+
+        if (winStart < 0 || macStart < 0 || linuxStart < 0 || rulesStart < 0) {
+            return GEMINI_PROMPT; // Fallback
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        // Core rules (output format, forbidden patterns, examples)
+        sb.append(GEMINI_PROMPT, 0, winStart);
+
+        // Include only the relevant platform section
+        if (osLower.contains("win")) {
+            // Windows CMD + PowerShell
+            sb.append(GEMINI_PROMPT, winStart, macStart);
+        } else if (osLower.contains("mac")) {
+            // macOS only
+            sb.append(GEMINI_PROMPT, macStart, linuxStart);
+        } else {
+            // Linux: macOS section (shared Unix commands) + Linux specifics
+            sb.append(GEMINI_PROMPT, macStart, rulesStart);
+        }
+
+        // Common rules (syntax, safety, modes, checklist)
+        sb.append(GEMINI_PROMPT, rulesStart, GEMINI_PROMPT.length());
+
+        return sb.toString();
+    }
+
     public static String getGroqPrompt() {
         return GROQ_PROMPT;
     }

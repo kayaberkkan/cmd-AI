@@ -31,7 +31,7 @@ public class TerminalApp {
     private static final String BOLD = "\u001B[1m";
 
     private static final String AI_COLOR = "\u001B[38;2;255;173;97m";
-    private static final String APP_VERSION = "1.1";
+    private static final String APP_VERSION = "1.2";
     private static final String VERSION_URL = "https://raw.githubusercontent.com/kayaberkkan/cmd-AI/main/version.txt";
 
     static class Message {
@@ -168,7 +168,7 @@ public class TerminalApp {
             } else {
                 config.setProperty("provider", "Google Gemini");
                 config.setProperty("api_key", "");
-                config.setProperty("gemini_model", "gemini-3-flash-preview");
+                config.setProperty("gemini_model", "gemini-3.5-flash");
                 config.setProperty("ollama_model", "llama3.2");
             }
         } catch (Exception ignored) {
@@ -325,7 +325,7 @@ public class TerminalApp {
             return callGroqApi(prompt, config.getProperty("groq_api_key", ""), os);
         } else {
             return callGeminiApi(prompt, config.getProperty("api_key", ""), os,
-                    config.getProperty("gemini_model", "gemini-3-flash-preview"));
+                    config.getProperty("gemini_model", "gemini-3.5-flash"));
         }
     }
 
@@ -421,9 +421,9 @@ public class TerminalApp {
             if (k.isEmpty())
                 return null;
 
-            String sys = SystemPrompts.getGeminiPrompt();
+            String sys = SystemPrompts.getGeminiPrompt(os);
 
-            String targetModel = (model == null || model.isEmpty()) ? "gemini-2.0-flash" : model;
+            String targetModel = (model == null || model.isEmpty()) ? "gemini-3.5-flash" : model;
             String url, body;
 
             if (targetModel.contains("2.0") || targetModel.contains("2.5") || targetModel.contains("3")
@@ -763,6 +763,7 @@ public class TerminalApp {
     }
 
     private static void openSettingsWindow(Properties config, File configFile) {
+        System.setProperty("apple.awt.UIElement", "true");
         System.setProperty("java.awt.headless", "false");
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -832,7 +833,7 @@ public class TerminalApp {
 
             Map<String, String[]> libGemini = new LinkedHashMap<>();
             libGemini.put("Google Gemini",
-                    new String[] { "gemini-3-flash-preview", "gemini-2.5-flash", "gemini-2.5-flash-lite" });
+                    new String[] { "gemini-3.5-flash", "gemini-3-flash-preview", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-3.1-flash-lite" });
 
             JLabel pL = new JLabel("SERVIS SAĞLAYICI");
             pL.setFont(lF);
@@ -925,7 +926,7 @@ public class TerminalApp {
                 if (isGemini) {
                     for (String s : libGemini.get("Google Gemini"))
                         mB.addItem(s);
-                    mB.setSelectedItem(config.getProperty("gemini_model", "gemini-3-flash-preview"));
+                    mB.setSelectedItem(config.getProperty("gemini_model", "gemini-3.5-flash"));
                 } else if (isOllama) {
                     java.util.List<String> ollamaModels = getInstalledOllamaModels();
                     if (ollamaModels.isEmpty()) {
