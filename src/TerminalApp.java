@@ -833,7 +833,7 @@ public class TerminalApp {
 
             Map<String, String[]> libGemini = new LinkedHashMap<>();
             libGemini.put("Google Gemini",
-                    new String[] { "gemini-3.5-flash", "gemini-3-flash-preview", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-3.1-flash-lite" });
+                    new String[] { "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3-flash-preview", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-3.1-flash-lite" });
 
             JLabel pL = new JLabel("SERVIS SAĞLAYICI");
             pL.setFont(lF);
