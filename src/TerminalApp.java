@@ -31,7 +31,7 @@ public class TerminalApp {
     private static final String BOLD = "\u001B[1m";
 
     private static final String AI_COLOR = "\u001B[38;2;255;173;97m";
-    private static final String APP_VERSION = "1.2";
+    private static final String APP_VERSION = "1.3";
     private static final String VERSION_URL = "https://raw.githubusercontent.com/kayaberkkan/cmd-AI/main/version.txt";
 
     static class Message {

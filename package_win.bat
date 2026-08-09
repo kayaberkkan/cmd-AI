@@ -59,7 +59,7 @@ jpackage ^
     --main-class Main ^
     --name "cmdAI" ^
     --type app-image ^
-    --app-version "1.2" ^
+    --app-version "1.3" ^
     --vendor "Berkkan Kaya" ^
     --copyright "2026 Berkkan Kaya" ^
     --description "Yapay Zeka Destekli Terminal Asistani" ^
